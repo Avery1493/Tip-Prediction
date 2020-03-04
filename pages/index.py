@@ -16,17 +16,22 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
         
-            ## Your Value Proposition
+            ## 🤑 How much could you make?
 
-            Emphasize how the app will benefit users. Don't emphasize the underlying technology.
+            Imagine you work as a delivey driver for Domino's Pizza. 
+            You receive a direct wage, but most of your earnings are received in tips. 
 
-            ✅ RUN is a running app that adapts to your fitness levels and designs personalized workouts to help you improve your running.
+            Does your income depend solely on your excellent service and generosity of your customers? 
+            Or can we optimize your earnings by planning out your work schedule? 
 
-            ❌ RUN is the only intelligent running app that uses sophisticated deep neural net machine learning to make your run smarter because we believe in ML driven workouts.
+            You can use this interactive app to predict your daily take home tips. 
 
             """
+            
+
         ),
-        dcc.Link(dbc.Button('Your Call To Action', color='primary'), href='/predictions')
+        
+        dcc.Link(dbc.Button("Let's try!", color='primary'), href='/predictions')
     ],
     md=4,
 )
@@ -37,7 +42,8 @@ fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size
 
 column2 = dbc.Col(
     [
-        dcc.Graph(figure=fig),
+        #dcc.Graph(figure=fig),
+        html.Img(src='assets/domino.jpg', className='img-fluid'),
     ]
 )
 
