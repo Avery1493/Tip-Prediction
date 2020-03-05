@@ -17,6 +17,23 @@ column1 = dbc.Col(
         
             ## Insights
 
+            ##### Permutation Importance   
+            A few different inputs went into this linear model: Month, Day, Year, Day of Week, Hours, Demand, and Precipitation. 
+            With so many features, it can become difficult to understand how the model concludes the predictions. Looking at the 
+            permutation feature importance’s, we can get a better grasp on which features carry the most weight in predicting the daily tip value. 
+
+
+            The specific day of the week and amount of rain or snow fall were important but held the least weight in determining the value of tips. 
+            On the other hand, the number of hours worked in a day and the business demand had the greatest impact on tips earned. 
+            This make sense once you think about the flow of a business; you would expect grater sales and earnings the longer you are open 
+            and how busy your store is. 
+
+
+            ##### Partial Dependency  
+            Making this point clearer, an interactive partial dependency plot between both hours and demand shows how that as the values of both 
+            increases, so does the estimated take home tip value.  As mentioned above, the amount of rainfall did seem to be positively correlated 
+            with tips as well, but at a smaller rate.  
+
 
             """
         ),
