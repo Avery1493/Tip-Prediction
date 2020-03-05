@@ -19,21 +19,32 @@ column1 = dbc.Col(
             ## 🤑 How much could you make?
 
             Imagine you work as a delivey driver for Domino's Pizza. 
-            You receive a direct wage, but most of your earnings are received in tips. 
+            (I know -- the best job ever!) You are paid a direct wage,
+            but most of your earnings are received in tips. 
 
-            Does your income depend solely on your excellent service and generosity of your customers? 
-            Or can we optimize your earnings by planning out your work schedule? 
+            Does your income depend solely on your excellent service and 
+            the generosity of your customers? Or can we optimize 
+            your earnings by planning out your work schedule? 
 
-            You can use this interactive app to predict your daily take home tips. 
+            You can use this interactive app to predict your daily take 
+            home tips. Then once you're done, you'll be ready to join 
+            the team!
 
             """
             
 
         ),
         
-        dcc.Link(dbc.Button("Let's try!", color='primary'), href='/predictions')
+        dcc.Link(dbc.Button("Let's try!", color='primary'), href='/predictions', className='mb-2'),
+        dcc.Markdown("&nbsp; "),
+        dcc.Markdown(
+            """
+            >> Ready to apply? &raquo;  
+            [jobs.Dominos](https://jobs.dominos.com/dominos-careers/)
+            """
+        )
     ],
-    md=4,
+    md=6,
 )
 
 gapminder = px.data.gapminder()
@@ -43,7 +54,7 @@ fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size
 column2 = dbc.Col(
     [
         #dcc.Graph(figure=fig),
-        html.Img(src='assets/domino.jpg', className='img-fluid'),
+        html.Img(src='assets/domino.jpg', className='img-fluid', height="500", width="300"),
     ]
 )
 

@@ -12,8 +12,8 @@ import pandas as pd
 from app import app
 
 #Load pipeline
-pipeline = load('assets/rf2.joblib')
-print('Pipline2 loaded')
+pipeline = load('assets/lg.joblib')
+print('Pipline3 loaded')
 
 # 2 column layout. 1st column width = 4/12
 # https://dash-bootstrap-components.opensource.faculty.ai/l/components/layout
@@ -23,14 +23,15 @@ column = dbc.Col(
             """
             ## 📈 Predictions
 
-            We want to predict how much money we will take home in tips today.
-            *Try adjusting the following __inputs__ to generate a new prediction.*
+            Let's predict how much money you could take home 
+            in tips today. *Try adjusting the following 
+            __inputs__ to generate a new prediction.*
 
             **Inputs:** 
             * Date: the day you want to work 
             * Hours: how long will you work
-            * Demand: how busy the store is 
-            * Precipitation: expected rain/snow (inches)
+            * Demand: how busy is your store 
+            * Precipitation: expected rain/snow in inches
             
             """
         )
@@ -41,16 +42,14 @@ column1 = dbc.Col(
     [
         dcc.Markdown(
             """
-        
-            ### Predictions
-
-            We want to predict how much money we will take home in tips today.
-
-            """
+            # Predicted Earnings 
+            &nbsp; """
         ),
-        html.H2('Day Earnings', className='mb-2'), 
-        html.Img(src='assets/friends.jpg', className='img-fluid'),
-        html.Div(id='prediction-content', className='lead'),
+     
+        #html.Img(src='assets/friends.jpg', className='img-fluid'),
+        html.Div(id='prediction-image', className='mb-2'),
+        html.Div(id='prediction-content', className='lead',
+        style={'textAlign':'center', 'fontSize':35}),
         
     ],
     md=4,
@@ -59,37 +58,40 @@ column1 = dbc.Col(
 column2 = dbc.Col(
     [
         dcc.Markdown("""
-        ### Feature Selection
-        
-        **DATE**""", className='mt-4'),
+        # Feature Selection  
+        &nbsp; """),
+
+        dcc.Markdown("""#### 📅**DATE**  
+        """, className='lead'),
         dcc.DatePickerSingle(
             id='date-picker-single',
-            min_date_allowed=dt(2017, 6, 26),
-            max_date_allowed=dt(2019, 6, 30)
+            date=('2017-07-01'),
+            min_date_allowed=dt(2017, 7,1),
+            max_date_allowed=dt(2022, 6, 30)
             
         ),
-        dcc.Markdown("""**SHIFT HOURS**""", className='mt-4'),
+        dcc.Markdown("""#### 👔**SHIFT HOURS**""", className='lead'),
         dcc.Slider(
             id='Hours',
             min=2,
-            max=9,
+            max=10,
             step=.5,
-            marks={i: '{}'.format(i) for i in range(14)},
-            value=5.5,),
-        dcc.Markdown("""**DEMAND**""", className='mt-4'),
+            marks={i: '{}'.format(i) for i in range(12)},
+            value=4.5,),
+        dcc.Markdown("""#### 🍕**DEMAND**""", className='lead'),
         dcc.RadioItems(
             id='Demand',
             options=[
-                {'label': 'Slow', 'value': 1},
-                {'label': 'Normal', 'value': 2},
-                {'label': 'Busy', 'value': 3}
+                {'label': 'Slow', 'value': 'Slow'},
+                {'label': 'Normal', 'value': 'Normal'},
+                {'label': 'Busy', 'value': 'Busy'}
             ],
-            value=1),
-        dcc.Markdown("""**PRECIPITATION**""", className='mt-4'),
+            value='Normal'),
+        dcc.Markdown("""#### 🌧️**PRECIPITATION**""", className='lead'),
         dcc.Slider(
         id='PRCP',
         min=0,
-        max=4,
+        max=3,
         step=0.1,
         value=0),
         dcc.Markdown("""""", id='out2') 
@@ -105,9 +107,9 @@ layout = dbc.Row(column), dbc.Row([column1, column2])
     [Input(component_id='PRCP', component_property='value')]
 )
 def update_output_div(input_value):
-    return '{} inches'.format(input_value) 
+    return '{} inch(es)'.format(input_value) 
 
-
+#tip prediction
 @app.callback(
     Output('prediction-content', 'children'),
     [Input('Hours', 'value'),Input('PRCP', 'value'),
@@ -134,6 +136,26 @@ def predict(Hours,PRCP,Demand,date):
     )
     y_pred = pipeline.predict(df)[0]
     return f'Estimated Tips: ${y_pred:.2f}'
+
+#image selection
+@app.callback(
+    Output('prediction-image','children'),
+    [Input("Demand", 'value')]
+)
+def select_image(Demand):
+    if Demand == 'Slow':
+        return html.Img(src='assets/group.jpg', className='img-fluid', 
+        style = {'height': '300px', 'display': 'block', 
+        'margin-left': 'auto', 'margin-right': 'auto'})
+    elif Demand == 'Busy':
+        return html.Img(src='assets/busy.jpg', className='img-fluid', 
+        style = {'height': '300px', 'display': 'block', 
+        'margin-left': 'auto', 'margin-right': 'auto'})
+    else:
+        return html.Img(src='assets/friend.jpg', className='img-fluid', 
+        style = {'height': '300px', 'display': 'block', 
+        'margin-left': 'auto', 'margin-right': 'auto'})
+    
 
 
         
