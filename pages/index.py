@@ -18,7 +18,7 @@ column1 = dbc.Col(
         
             ## 🤑 How much could you make?
 
-            Imagine you work as a delivey driver for Domino's Pizza. 
+            Imagine you work as a delivery driver for Domino's Pizza. 
             (I know -- the best job ever!) You are paid a direct wage,
             but most of your earnings are received in tips. 
 

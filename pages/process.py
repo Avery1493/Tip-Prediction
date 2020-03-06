@@ -183,12 +183,14 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
             ##### Model Selection  
+            * Linear Regression model - Mean Absolute Error: $13.47  
+            * Random Forest model - Mean Absolute Error: $18.69  
             * The data truly has a linear pattern. The Linear Regression more accurately predicted the actual total tips on the test set than the random forest model.
 
             After training my models, I wanted to know how they would perform on new data. I fed the test dataset (that I left out in the beginning) through my 
             linear and random forest models. The **MAE for the linear regression** on the test set was **$13.47** 😁 (fairly close to the train MAE of 11.78). The **MAE for 
             the random forest model** on the test set was **$18.69** 😲 (about as bad as our original baseline). Even though the random forest model seemed to perform well 
-            on our taining set, it could not accuratley predict the total tips as well as the linear regression model. Therefore, a linear model would be the best to use 
+            on our tainning set, it could not accuraty predict the total tips as well as the linear regression model. Therefore, a linear model would be the best to use 
             because it produces a lower error or more accurate predictions for the entire dataset.
 
 
@@ -200,7 +202,7 @@ column1 = dbc.Col(
 
 
             I was really surprised the random forest model was outperformed by a simple regression (even after randomized search and cross validation). 
-            More than often it’s the other way around. The takeaway from this project is that linear regressions work really well when you data has a linear 
+            More than often it’s the other way around. The takeaway from this project is that linear regressions work really well when your data has a linear 
             shape and a tree or random forest should worked better if the data is non-linear.
             
             
