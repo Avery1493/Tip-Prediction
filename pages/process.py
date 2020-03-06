@@ -16,6 +16,9 @@ column1 = dbc.Col(
             """
             ## Process
 
+            """),
+        dcc.Markdown(
+            """
             ##### Data Collection
             * Personal daily tip earnings recorded by one driver from June 
             2017-June2019  
@@ -42,13 +45,18 @@ column1 = dbc.Col(
             [extracted weather data](https://towardsdatascience.com/getting-weather-data-in-3-easy-steps-8dc10cc5c859) form 
             [NOAA](https://www.noaa.gov/) (National Oceanic and Atmospheric Administration).
 
+            """),
+        html.Img(src='assets/note.png', className='img-fluid', height="500", width="250"),
+        html.Img(src='assets/tips.PNG', className='img-fluid', height="400", width="850"),
+        dcc.Markdown(
+            """
             ##### Feature Selection  
             * Extracted month, day, year, and day of week from the date  
             * Generated categorical feature for daily business demand  
             * Imported daily precipitation amount measured in inches
 
             While my initial idea was great, I got a little bit discouraged looking at my limited feature options (columns). I was especially 
-            worried about potential data leakage, because I wanted to predict daily tip totals, and most of my data was collected after the fact. 
+            worried about potential data leakage, because I wanted to predict total daily tips, and most of my data was collected after the fact. 
             Therefore, I immediately threw out the columns “Take Home” and “Mileage”.  Later, I threw out “Week”. I used the “Miles” column to 
             generate a new feature before ultimately throwing that one out as well. 
 
@@ -61,22 +69,40 @@ column1 = dbc.Col(
             Next, I used the “Miles” column generate a new feature. I wanted to essentially capture the daily business demand at the store. 
             Intuitively, I recognized that if the store was busy, we would have more deliveries, and therefore I would have put more miles on 
             my car that day. I calculated the number of miles I drove per hour by dividing “Miles” by “Hours”.  From the box plot you can see the 
-            distribution of miles per every hour driven per day. I classified the middle 50% (IQR) as ‘Normal’. Anything above or below that I 
+            average miles per hour driven each work day. I classified the middle 50% (IQR) as ‘Normal’. Anything above or below that I 
             called a ‘Busy’ or ‘Slow’ day for pizza!
 
 
+            """),
+            html.Img(src='assets/boxplot.png', className='img-fluid',style = {'display': 'block', 
+        'margin-left': 'auto', 'margin-right': 'auto'}, height="350", width="500"),
+        dcc.Markdown(
+            """
             Lastly, as mentioned before, I used NOAA to get information about the weather. Data supplied from the TN Murfreesboro Stones River 
             NB (Station ID:  GHCND:USC00406374) gave me the daily precipitation total.  I merged the two datasets on the date.
 
 
             Upon reflection, other features I wish I had, but did not think to collect (or couldn’t collect) were prior year to date sales, 
-            total drivers scheduled, if there was a football game that day. Other features, I could have but didn’t explore were adding the 
-            season (Spring, Summer, Fall, Winter). Or similarly, since my location was right off a college campus (and the university students 
+            total drivers scheduled, if there was a football game that day. Other features, I could have but did not explore were adding the 
+            seasons (Spring, Summer, Fall, Winter). Or similarly, since my location was right off a college campus (and the university students 
             contributed much to our sales), adding the school semester (Fall, Spring, Summer, Break).  
 
 
             The final features I had for my model included, ('Day of Week’, 'Hours', 'Year', 'Month', 'Day', 'PRCP', 'Demand').
+            
+            
+            ```
+            cutoff = '2018-07-01 00:00:00'  
+            train = df[df['Date'] < cutoff]  
+            test = df[df['Date'] >= cutoff]  
+            target = 'Tips'  
+            features = ['Day of Week','Hours', 'Year', 'Month', 'Day', 'PRCP', 'Demand']
+            ```
+            ---
 
+            """),
+        dcc.Markdown(
+            """
             ##### Model Generation  
             * Baseline model - Mean Absolute Error: $18.82  
             * Linear Regression model - Mean Absolute Error: $11.78  
@@ -107,6 +133,9 @@ column1 = dbc.Col(
             I thought that was fantastic.
             
 
+            """),
+        dcc.Markdown(
+            """
             ##### Model Selection  
             * The data truly has a linear pattern. The Linear Regression more accurately predicted the actual tip totals on the test set than the random forest model.
 
@@ -116,6 +145,9 @@ column1 = dbc.Col(
             for this predictive model because it produces a lower error or more accurate prediction.
 
 
+            """),
+        dcc.Markdown(
+            """
             ##### Conclusion 
             For generating the predictions in this app, I used a Linear Regression model (retrained on the entire dataset) with a MAE of $12.61.
 
