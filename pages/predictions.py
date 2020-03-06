@@ -21,7 +21,7 @@ column = dbc.Col(
     [
         dcc.Markdown(
             """
-            ## 📈 Predictions
+            # 📈 Predictions
 
             Let's predict how much money you could take home 
             in tips today. *Try adjusting the following 
@@ -42,23 +42,24 @@ column1 = dbc.Col(
     [
         dcc.Markdown(
             """
-            # Predicted Earnings 
+            ## Predicted Earnings 
             &nbsp; """
         ),
      
         #html.Img(src='assets/friends.jpg', className='img-fluid'),
         html.Div(id='prediction-image', className='mb-2'),
         html.Div(id='prediction-content', className='lead',
-        style={'textAlign':'center', 'fontSize':35}),
+        style={'textAlign':'center', 'fontSize':25}),
         
     ],
     md=4,
+    
 )
 
 column2 = dbc.Col(
     [
         dcc.Markdown("""
-        # Feature Selection  
+        ## Feature Selection  
         &nbsp; """),
 
         dcc.Markdown("""#### 📅**DATE**  
@@ -70,6 +71,7 @@ column2 = dbc.Col(
             max_date_allowed=dt(2022, 6, 30)
             
         ),
+        html.Br(),
         dcc.Markdown("""#### 👔**SHIFT HOURS**""", className='lead'),
         dcc.Slider(
             id='Hours',
