@@ -106,9 +106,9 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
             ##### Model Generation  
-            * Baseline model - Mean Absolute Error: $18.82  
+            * Baseline model - Mean Absolute Error: $24.85  
             * Linear Regression model - Mean Absolute Error: $11.78  
-            * Random Forest model - Mean Absolute Error: $7.75
+            * Random Forest model - Mean Absolute Error: $10.79
 
             To be able to make a predictive model, I used a date split on my dataset. Any information that was collected from the end of June 2018 
             and prior (middle of the two years of data), I labeled train. The information from the train dataset is what I used to create my models. 
@@ -117,9 +117,9 @@ column1 = dbc.Col(
 
 
             I started with a baseline model. If I were to just guess how much I took home in tips each night with the average, how correct would I be? 
-            The mean for the total tips in my data set was $58.23. I used the metric mean absolute error (MAE) to measure the average error from my model’s 
-            predicted values and the true values.  The baseline model’s MAE was $18.82. This means, if I were to guess that I'd make $58.23 every night, 
-            I would be off *on average by almost $20*. This is a lot of error. 
+            The mean for the total tips in my data set was $66.34. I used the metric mean absolute error (MAE) to measure the average error from my model’s 
+            predicted values and the true values.  The baseline model’s MAE was $24.85. This means, if I were to guess that I'd make $66.34 every night, 
+            I would be off *on average by almost $25*. This is a lot of error. 
 
 
             Next, I made a Linear Regression model. Using the SkLearn library, I created a pipeline to transform my data and run a linear regression. I used 
@@ -131,20 +131,65 @@ column1 = dbc.Col(
             The last model I created was a [Random Forest model](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html). 
             Again, the regressor was wrapped in a pipeline to encode categorical values and impute missing values with the median. In addition, I used 
             [Randomized Search CV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html) to find the optimal hyper 
-            parameters  for the final pipeline. The random forest model using the tuned hyper parameters produced a mean absolute error (MAE) of $7.75. 
+            parameters  for the final pipeline. The random forest model using the tuned hyper parameters produced a mean absolute error (MAE) of $10.79. 
             I thought that was fantastic.
             
 
             """),
         dcc.Markdown(
             """
+            ##### Example  
+            Let's take a look at one of our observations.  
+            ROW 81 : For this particular day, we truly made **$50.35**
+
+            """
+        ),
+        html.Img(src='assets/81.PNG', className='img-fluid', style = {'display': 'block', 
+        'margin-left': 'auto', 'margin-right': 'auto'}),
+        dcc.Markdown(
+            """
+            The **Linear Regression** model predicted we made **$65.70**
+            ```
+            Intercept: 13236.592345662393
+            Coefficients:
+            Day of Week     0.143363
+            Hours          10.752171
+            Year           -6.575769
+            Month          -0.897345
+            Day             0.209858
+            PRCP            4.899379
+            Demand         11.877490  
+            Tips = intercept + (x1*Day_of_Week) + (x2*Hours) + (x3*Year)  
+            + (x4*Month) + (x5*Day) + (x6*PRCP) + (x7*Demand)
+            ```
+
+            The **Random Forest** model predicted we made **$54.95**  
+            ```  
+            Estimated tips: $54.95
+            Starting from a base value of: $58.48
+            (Day of Week, 5.0)   -0.110938
+            (Hours, 5.5)         -7.372472
+            (Year, 2017.0)        0.000000
+            (Month, 10.0)        -0.996631
+            (Day, 28.0)          -0.171588
+            (PRCP, 0.01)         -0.031930
+            (Demand, 3.0)         5.153877  
+            ````
+
+            """
+        ),
+        html.Img(src='assets/shapplt.PNG', className='img-fluid', style = {'display': 'block', 
+        'margin-left': 'auto', 'margin-right': 'auto'}),
+        dcc.Markdown(
+            """
             ##### Model Selection  
             * The data truly has a linear pattern. The Linear Regression more accurately predicted the actual total tips on the test set than the random forest model.
 
             After training my models, I wanted to know how they would perform on new data. I fed the test dataset (that I left out in the beginning) through my 
-            linear and random forest models. The MAE for the linear regression on the test set was $13.47 (fairly close to the train MAE of 11.78). The MAE for 
-            the random forest model on the test set was $18.82 (just as bad as our original baseline). This means that the linear model would be the best to use 
-            for this predictive model because it produces a lower error or more accurate predictions.
+            linear and random forest models. The **MAE for the linear regression** on the test set was **$13.47** 😁 (fairly close to the train MAE of 11.78). The **MAE for 
+            the random forest model** on the test set was **$18.69** 😲 (about as bad as our original baseline). Even though the random forest model seemed to perform well 
+            on our taining set, it could not accuratley predict the total tips as well as the linear regression model. Therefore, a linear model would be the best to use 
+            because it produces a lower error or more accurate predictions for the entire dataset.
 
 
             """),
