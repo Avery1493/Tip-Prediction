@@ -31,7 +31,7 @@ column1 = dbc.Col(
 
             """
         ),
-        html.Img(src='assets/importances.png', className='img-fluid', style = {'display': 'block', 
+        html.Img(src='assets/importances.PNG', className='img-fluid', style = {'display': 'block', 
         'margin-left': 'auto', 'margin-right': 'auto'}, height="500", width="200"),
         dcc.Markdown(
             """
