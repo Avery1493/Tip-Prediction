@@ -32,7 +32,7 @@ column1 = dbc.Col(
             """
         ),
         html.Img(src='assets/importances.PNG', className='img-fluid', style = {'display': 'block', 
-        'margin-left': 'auto', 'margin-right': 'auto'}, height="500", width="200"),
+        'margin-left': 'auto', 'margin-right': 'auto'}, height="600", width="300"),
         dcc.Markdown(
             """
             ##### Partial Dependency  
@@ -43,7 +43,17 @@ column1 = dbc.Col(
             """
         ),
         html.Img(src='assets/demandhours.png', className='img-fluid', height="1000", width="550"),
-        html.Img(src='assets/demandprcp.png', className='img-fluid', height="1000", width="550")
+        html.Img(src='assets/demandprcp.png', className='img-fluid', height="1000", width="550"),
+        dcc.Markdown(
+            """
+            ---
+            
+            ### Fun Fact:  
+            Domino's drivers in Madrid, Spain will deliver you pizza on this!
+            """),
+
+        html.Img(src='assets/spain.jpg', className='img-fluid', height="200", width="400")
+
 
     ],
 )

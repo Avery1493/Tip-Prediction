@@ -24,7 +24,7 @@ column = dbc.Col(
             # 📈 Predictions
 
             Let's predict how much money you could take home 
-            in tips today. *Try adjusting the following 
+            in tips. *Try adjusting the following 
             __inputs__ to generate a new prediction.*
 
             **Inputs:** 
@@ -42,7 +42,7 @@ column1 = dbc.Col(
     [
         dcc.Markdown(
             """
-            ## Predicted Earnings 
+            ### Predicted Earnings 
             &nbsp; """
         ),
      
@@ -59,11 +59,11 @@ column1 = dbc.Col(
 column2 = dbc.Col(
     [
         dcc.Markdown("""
-        ## Feature Selection  
+        ### Feature Selection  
         &nbsp; """),
 
         dcc.Markdown("""#### 📅**DATE**  
-        """, className='lead'),
+        """, className='mb-2'),
         dcc.DatePickerSingle(
             id='date-picker-single',
             date=('2017-07-01'),
@@ -71,8 +71,8 @@ column2 = dbc.Col(
             max_date_allowed=dt(2022, 6, 30)
             
         ),
-        html.Br(),
-        dcc.Markdown("""#### 👔**SHIFT HOURS**""", className='lead'),
+        html.Div(style={'padding': 10}),
+        dcc.Markdown("""#### 👔**SHIFT HOURS**""", className='mb-2'),
         dcc.Slider(
             id='Hours',
             min=2,
@@ -80,7 +80,9 @@ column2 = dbc.Col(
             step=.5,
             marks={i: '{}'.format(i) for i in range(12)},
             value=4.5,),
-        dcc.Markdown("""#### 🍕**DEMAND**""", className='lead'),
+        
+        html.Div(style={'padding': 10}),
+        dcc.Markdown("""#### 🍕**DEMAND**""", className='mb-2'),
         dcc.RadioItems(
             id='Demand',
             options=[
@@ -89,13 +91,16 @@ column2 = dbc.Col(
                 {'label': 'Busy', 'value': 'Busy'}
             ],
             value='Normal'),
-        dcc.Markdown("""#### 🌧️**PRECIPITATION**""", className='lead'),
+        
+        #html.Div([html.P([html.Br()])]),
+        html.Div(style={'padding': 10}),
+        dcc.Markdown("""#### 🌧️**PRECIPITATION**""", className='mb-2'),
         dcc.Slider(
         id='PRCP',
         min=0,
         max=3,
         step=0.1,
-        value=0),
+        value=0.0),
         dcc.Markdown("""""", id='out2') 
         
         

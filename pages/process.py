@@ -92,11 +92,13 @@ column1 = dbc.Col(
             
             
             ```
+            target = 'Tips'  
+            features = ['Day of Week','Hours', 'Year', 'Month', 'Day', 'PRCP', 'Demand']
+            
             cutoff = '2018-07-01 00:00:00'  
             train = df[df['Date'] < cutoff]  
             test = df[df['Date'] >= cutoff]  
-            target = 'Tips'  
-            features = ['Day of Week','Hours', 'Year', 'Month', 'Day', 'PRCP', 'Demand']
+            
             ```
             ---
 
@@ -110,14 +112,14 @@ column1 = dbc.Col(
 
             To be able to make a predictive model, I used a date split on my dataset. Any information that was collected from the end of June 2018 
             and prior (middle of the two years of data), I labeled train. The information from the train dataset is what I used to create my models. 
-            The remaining data was put in the test dataset. The test set will be used afterwards to test how accurate my model predicts total tips on 
+            The remaining data was put in the test dataset. The test set will be used afterwards to test how accurate each model predicts total tips on 
             unseen data.
 
 
             I started with a baseline model. If I were to just guess how much I took home in tips each night with the average, how correct would I be? 
             The mean for the total tips in my data set was $58.23. I used the metric mean absolute error (MAE) to measure the average error from my model’s 
-            predicted values and the true values.  The baseline model’s MAE was $18.82. This means, if I were to guess that every night, I would make $58.23, 
-            I would be off on average by almost $20. This is a lot of error. 
+            predicted values and the true values.  The baseline model’s MAE was $18.82. This means, if I were to guess that I'd make $58.23 every night, 
+            I would be off *on average by almost $20*. This is a lot of error. 
 
 
             Next, I made a Linear Regression model. Using the SkLearn library, I created a pipeline to transform my data and run a linear regression. I used 
@@ -137,12 +139,12 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
             ##### Model Selection  
-            * The data truly has a linear pattern. The Linear Regression more accurately predicted the actual tip totals on the test set than the random forest model.
+            * The data truly has a linear pattern. The Linear Regression more accurately predicted the actual total tips on the test set than the random forest model.
 
-            After training my models, I wanted to know how they would perform on new data. I fed the test dataset that I left out in the beginning, through my 
-            linear and random forest models. The MAE for the linear regression on the test set was $13.47 (fairly close to the train MEA of 11.78). The MAE for 
+            After training my models, I wanted to know how they would perform on new data. I fed the test dataset (that I left out in the beginning) through my 
+            linear and random forest models. The MAE for the linear regression on the test set was $13.47 (fairly close to the train MAE of 11.78). The MAE for 
             the random forest model on the test set was $18.82 (just as bad as our original baseline). This means that the linear model would be the best to use 
-            for this predictive model because it produces a lower error or more accurate prediction.
+            for this predictive model because it produces a lower error or more accurate predictions.
 
 
             """),
@@ -153,12 +155,21 @@ column1 = dbc.Col(
 
 
             I was really surprised the random forest model was outperformed by a simple regression (even after randomized search and cross validation). 
-            More than often it’s the other way around. The takeaway from this project is that linear regressions work really well when data has a linear 
-            shape and a tree or random forest would have worked better if my dataset was non-linear.
+            More than often it’s the other way around. The takeaway from this project is that linear regressions work really well when you data has a linear 
+            shape and a tree or random forest should worked better if the data is non-linear.
             
             
             """
         ),
+        dcc.Markdown(
+            """
+            ---
+            
+            """),
+
+        html.Img(src='assets/cute.PNG', className='img-fluid', style = {'display': 'block', 
+        'margin-left': 'auto', 'margin-right': 'auto'}, height="500", width="250")
+
         
 
     ],
