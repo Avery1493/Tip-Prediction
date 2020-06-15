@@ -25,11 +25,11 @@ column1 = dbc.Col(
             * Extracted daily weather data from NOAA 
 
             Aside from getting this application deployed, collecting the data for this project was probably my favorite part. 
-            I have worked as a delivery driver for Domino’s Pizza for over 2.5 years. It started as a part-time job during college. 
+            I have worked as a delivery driver for Domino’s Pizza for over 3 years. It started as a part-time job during college. 
             Delivering became my full-time job for about a year after school. However, now it’s my fun second job! 
 
 
-            At the first franchise store I worked at [Middle Tennessee Pizza Inc.](http://www.midtnpizza.com/), I was paid hourly 
+            At the first franchise store I worked at, [Middle Tennessee Pizza Inc.](http://www.midtnpizza.com/), I was paid hourly 
             the federal minimum wage ($7.25). In addition, I earned cash tips every night I worked. As a finance major and number nerd, 
             I just automatically kept track of this information. I would save the information in a note on my phone, then at the 
             end of every work week, I’d enter it into a excel sheet. For budgeting purposes and to calculate my total hourly wage, 
@@ -66,7 +66,7 @@ column1 = dbc.Col(
             four elements from “Date”: Year, Month, Day, and the Day of the Week, which replaced my “Day” column. 
 
 
-            Next, I used the “Miles” column generate a new feature. I wanted to essentially capture the daily business demand at the store. 
+            Next, I used the “Miles” column to generate a new feature. I wanted to essentially capture the daily business demand at the store. 
             Intuitively, I recognized that if the store was busy, we would have more deliveries, and therefore I would have put more miles on 
             my car that day. I calculated the number of miles I drove per hour by dividing “Miles” by “Hours”.  From the box plot you can see the 
             average miles per hour driven each work day. I classified the middle 50% (IQR) as ‘Normal’. Anything above or below that I 
@@ -112,7 +112,7 @@ column1 = dbc.Col(
 
             To be able to make a predictive model, I used a date split on my dataset. Any information that was collected from the end of June 2018 
             and prior (middle of the two years of data), I labeled train. The information from the train dataset is what I used to create my models. 
-            The remaining data was put in the test dataset. The test set will be used afterwards to test how accurate each model predicts total tips on 
+            The remaining data was put in the test dataset. The test set was used afterwards to test how accurate each model predicted total tips on 
             unseen data.
 
 
@@ -190,7 +190,7 @@ column1 = dbc.Col(
             After training my models, I wanted to know how they would perform on new data. I fed the test dataset (that I left out in the beginning) through my 
             linear and random forest models. The **MAE for the linear regression** on the test set was **$13.47** 😁 (fairly close to the train MAE of 11.78). The **MAE for 
             the random forest model** on the test set was **$18.69** 😲 (about as bad as our original baseline). Even though the random forest model seemed to perform well 
-            on our tainning set, it could not accuraty predict the total tips as well as the linear regression model. Therefore, a linear model would be the best to use 
+            on our trainning set, it could not accurately predict the total tips as well as the linear regression model. Therefore, a linear model would be the best to use 
             because it produces a lower error or more accurate predictions for the entire dataset.
 
 
